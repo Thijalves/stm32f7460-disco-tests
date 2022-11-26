@@ -10,15 +10,28 @@ FileHandle *mbed::mbed_override_console(int fd){
 
 int main()
 {
+    printf("System initializing");
+
+    //inicializa o lcd
     BSP_LCD_Init();
     BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER, LCD_FB_START_ADDRESS);
     BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER);
     BSP_LCD_Clear(LCD_COLOR_WHITE);
 
+    //inicialica o touch
+    TS_StateTypeDef TS_State;
+    if (BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize())){
+        printf("touchscreen int faild\n");
+    } else {
+        printf("touchscreen int ok\n");
+    }
+    
+    //inits the hud
     HUD menu;
 
     while (1) {
-
+        //gets the current touches
+        BSP_TS_GetState(&TS_State);
 
         
     }

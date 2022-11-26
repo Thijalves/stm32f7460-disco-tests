@@ -4,9 +4,7 @@
 HUD::HUD(){
     //desenha o menu do canto inferior esquerdo
     BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
-    // BSP_ LCD_FillRect(0, SCREEN_HEIGHT-menuHeight, menuWidth, menuHeight);
-    BSP_LCD_FillCircle((menuWidth/2), SCREEN_HEIGHT-menuHeight+5, (menuWidth/2)-1);
-    // customFunctions::drawImage(0, SCREEN_HEIGHT-menuHeight, images::side, 128);
+    BSP_LCD_FillRect(0, SCREEN_HEIGHT-menuHeight, menuWidth, menuHeight);
     customFunctions::drawImage((menuWidth-32)/2, SCREEN_HEIGHT-menuHeight, images::ssl_0, 32);
     customFunctions::drawImage((menuWidth-32)/2, SCREEN_HEIGHT-menuHeight+32+5, images::vss_blue_green, 32);
     customFunctions::drawImage((menuWidth-32)/2, SCREEN_HEIGHT-menuHeight+64+10, images::gear, 32);
@@ -15,7 +13,7 @@ HUD::HUD(){
     BSP_LCD_SetBackColor(LCD_COLOR_VERDEROBOCIN);
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     BSP_LCD_SetFont(&Font12);
-    BSP_LCD_DisplayStringAt(380, 0, (uint8_t*)"Batt: 50%", LEFT_MODE);
+    BSP_LCD_DisplayStringAt(420, 0, (uint8_t*)"Batt: 50%", LEFT_MODE);
 
     //desenha a logo do robocin
     customFunctions::drawImage(0, 0, images::logo, 64);
