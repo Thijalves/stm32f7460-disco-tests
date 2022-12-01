@@ -1,6 +1,5 @@
 #include "mbed.h"
 #include "widgets.h"
-#include "images.h"
 #include <string>
 
 //serial printf debug
@@ -9,40 +8,14 @@ FileHandle *mbed::mbed_override_console(int fd){
     return &serial_port;
 }
 
-int soma(int a, int b) {
-    return a + b;
+//setup the home screen
+void homeScreen(){
+    BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
+    BSP_LCD_FillRect(0, 0, 240, 272);
+    customFunctions::drawImage(88, 104, images::logo, 64);
+    Button botao(310, 140, 100, 40, NULL);
 }
 
-class Button{
-    private:
-        int posX;
-        int posY;
-        int width;
-        int height;
-        std::function<void()> pressed;
-    public:
-    Button(int posX, int posY, int width, int height, void (* func)()){
-
-        this->posX = posX;
-        this->posY = posY;
-        this->width = width;
-        this->height = height;
-        BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
-        BSP_LCD_FillRect(posX, posY, width, height);
-    }
-    bool isPressed(TS_StateTypeDef* TS_State){
-        if (!TS_State->touchDetected)
-            return false;
-        
-        if(posX <= TS_State->touchX[0] && TS_State->touchX[0] <= posX+width)
-            if(posY <= TS_State->touchY[0] && TS_State->touchY[0] <= posX+height)
-                return true;
-        
-        return false;
-        
-    }
-    
-};
 
 int main()
 {
@@ -64,12 +37,10 @@ int main()
         printf("touch OK!\n");
     }
 
-    // customFunctions::drawImage(200, 200, images::logo, 64);
-
     //setup the gome screen
     BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
     BSP_LCD_FillRect(0, 0, 240, 272);
-    customFunctions::drawImage(88, 104, images::logo, 64);
+    // customFunctions::drawImage(88, 104, images::logo, 64);
     Button botao(310, 140, 100, 40, NULL);
 
     while (1) {

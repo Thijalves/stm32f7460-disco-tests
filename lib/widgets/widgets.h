@@ -4,33 +4,27 @@
 #define DISPLAY_HEIGHT 272
 #define DISPLAY_WIDTH 480
 
-class HUD {
+
+class Button{
     private:
-        enum currentScreen{VSS, SSL, BS};
-        int menuWidth = 40;
-        int menuHeight = 117;
+        int posX;
+        int posY;
+        int width;
+        int height;
+        std::function<void()> pressed;
     public:
-        HUD();
+    Button(int posX, int posY, int width, int height, void (* func)());
+    bool isPressed(TS_StateTypeDef* TS_State);  
 };
 
-class VSSCard{
-    private:
-        int id;
-        char team;
-        double speedM1;
-        double speedM2;
-        double batt;
-        double temp;
-    public:
-        VSSCard(int posX, int posY);
-};
-
-
-class TextButton{
-    private:
-        bool isPressed;
-        char* text;
-    public:
-        TextButton(int posX, int posY, int width, int height, uint8_t* text, uint32_t color);
-        void onTouch();
-};
+// class VSSCard{
+//     private:
+//         int id;
+//         char team;
+//         double speedM1;
+//         double speedM2;
+//         double batt;
+//         double temp;
+//     public:
+//         VSSCard(int posX, int posY);
+// };
