@@ -12,7 +12,7 @@ FileHandle *mbed::mbed_override_console(int fd){
 void homeScreen(){
     BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
     BSP_LCD_FillRect(0, 0, 240, 272);
-    customFunctions::drawImage(88, 104, images::logo, 64);
+    customFunctions::drawImage(88, 104, images::vss_blue_green, 64);
     Button botao(310, 140, 100, 40, NULL);
 }
 
@@ -37,7 +37,7 @@ int main()
         printf("touch OK!\n");
     }
 
-    //setup the gome screen
+    //setup the home screen
     BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
     BSP_LCD_FillRect(0, 0, 240, 272);
     // customFunctions::drawImage(88, 104, images::logo, 64);
@@ -46,15 +46,10 @@ int main()
     while (1) {
         BSP_TS_GetState(&TS_State);
 
-        // if(botao.isPressed(&TS_State)){
-        //     printf("tocou\n");
-        // }
+        if(botao.isPressed(&TS_State)){
+            printf("tocou\n");
+        }
         
-        // if (TS_State.touchDetected) {
-        //     if(0 <= TS_State.touchX[0] && TS_State.touchX[0] <= 0+100){
-        //         printf("%d %d\n", TS_State.touchX[0], TS_State.touchY[0]);
-        //     }
-        // }
     }   
 }
 
