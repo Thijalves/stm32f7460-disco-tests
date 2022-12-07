@@ -1,6 +1,7 @@
 #include "mbed.h"
 #include "widgets.h"
 #include <string>
+#include "images.h"
 
 //serial printf debug
 static BufferedSerial serial_port(USBTX, USBRX, 115200);
@@ -8,13 +9,13 @@ FileHandle *mbed::mbed_override_console(int fd){
     return &serial_port;
 }
 
-//setup the home screen
-void homeScreen(){
-    BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
-    BSP_LCD_FillRect(0, 0, 240, 272);
-    customFunctions::drawImage(88, 104, images::vss_blue_green, 64);
-    Button botao(310, 140, 100, 40, NULL);
-}
+//enum for screen manegement
+enum Screens{
+    home,
+    vss,
+    ssl,
+    settings
+}screenCounter;
 
 
 int main()
@@ -37,19 +38,55 @@ int main()
         printf("touch OK!\n");
     }
 
-    //setup the home screen
-    BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
-    BSP_LCD_FillRect(0, 0, 240, 272);
-    // customFunctions::drawImage(88, 104, images::logo, 64);
-    Button botao(310, 140, 100, 40, NULL);
-
     while (1) {
-        BSP_TS_GetState(&TS_State);
 
-        if(botao.isPressed(&TS_State)){
-            printf("tocou\n");
+        switch (screenCounter) {
+        case home: {
+            //create screen widgets
+            Button vssButton(310, 70, 120, 32);
+            Image vssImage(310, 70, 32, images::vss_blue_green);
+            Image logo(78, 93, 85, images::logo);
+
+            //draw widgets
+            BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
+            BSP_LCD_FillRect(0, 0, 240, 272);
+            vssButton.draw();
+            vssImage.draw();
+            logo.draw();
+
+            //window 'function'
+            while (1){
+                //update touch
+                BSP_TS_GetState(&TS_State);
+
+                //check buttons
+                // if(vssButton.isPressed(&TS_State)){
+                //     screenCounter = vss;
+                //     break;
+                // }
+            }
         }
-        
+        break;
+        case vss:
+            BSP_LCD_Clear(LCD_COLOR_WHITE);
+            printf("vss\n");
+            break;
+        case ssl:
+            printf("ssl\n");
+            break;
+        case settings:
+            printf("settings\n");
+            break;
+        default:
+            printf("lixo\n");
+            break;
+        }
+       
+      
+        // if(botao.isPressed(&TS_State))
+            
+       
+
     }   
 }
 

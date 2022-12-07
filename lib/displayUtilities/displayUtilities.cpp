@@ -1,6 +1,6 @@
 #include "displayUtilities.h"
 
-void customFunctions::drawImage (int posX, int posY, uint8_t* imagem, int dimension){
+void displayFunctions::drawImage (int posX, int posY, uint8_t* imagem, int dimension){
 
     int counter = 0;
 

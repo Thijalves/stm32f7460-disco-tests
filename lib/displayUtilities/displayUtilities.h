@@ -5,7 +5,7 @@
 #define SCREEN_WIDTH 480
 #define SCREEN_HEIGHT 272
 
-namespace customFunctions{
+namespace displayFunctions{
 
     /* use sempre imagens quadradas
     preto = 0xff000001, transparente = 0xffc7c7c7
