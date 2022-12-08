@@ -1,5 +1,6 @@
 #include <mbed.h>
-#include "displayUtilities.h"
+#include "LCD_DISCO_F746NG.h"
+#include "TS_DISCO_F746NG.h"
 
 #define DISPLAY_HEIGHT 272
 #define DISPLAY_WIDTH 480
@@ -8,35 +9,27 @@ class Image{
     private:
         int posX;
         int posY;
-        int size;
+        int width;
+        int height;
         uint8_t* source;
     public:
-        Image(int posX, int posY, int size, uint8_t* source);
+        Image(int posX, int posY, uint8_t* source);
+        bool isPressed(TS_StateTypeDef* TS_State);
         void draw();
 };
 
-class Button{
+class Rectangle{
     private:
         int posX;
         int posY;
         int width;
         int height;
+        uint32_t color;
         std::function<void()> pressed;
     public:
-        Button(int posX, int posY, int width, int height);
+        Rectangle(int posX, int posY, int width, int height, uint32_t color);
         bool isPressed(TS_StateTypeDef* TS_State);
         void draw();
 };
 
-// class ImgTxtButton{
-//     private:
-//         int posX;
-//         int posY;
-//         int width;
-//         int height;
-//         uint8_t *text;
-//     public:
-//         ImgTxtButton(int posX, int posY, int width, int height, uint8_t* text);
-//         bool isPressed(TS_StateTypeDef* TS_State);
-//         void draw();
-// };
+

@@ -7,9 +7,6 @@
 
 namespace displayFunctions{
 
-    /* use sempre imagens quadradas
-    preto = 0xff000001, transparente = 0xffc7c7c7
-    https://lvgl.io/tools/imageconverter */
-    void drawImage(int posX, int posY, uint8_t* imagem, int dimension);
+    void init();
     
 }

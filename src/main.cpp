@@ -17,7 +17,6 @@ enum Screens{
     settings
 }screenCounter;
 
-
 int main()
 {
     printf("------booting system------\n");
@@ -43,27 +42,29 @@ int main()
         switch (screenCounter) {
         case home: {
             //create screen widgets
-            Button vssButton(310, 70, 120, 32);
-            Image vssImage(310, 70, 32, images::vss_blue_green);
-            Image logo(78, 93, 85, images::logo);
-
+            Image vssButton(280, 70, images::vssButton);
+            Image sslButton(280, 130, images::vssButton);
+            Image settingsButton(280, 190, images::vssButton);
+            Image logo(58, 93, images::logo);
+            Rectangle logoBackground(0,0,200, 272, LCD_COLOR_VERDEROBOCIN);
+            
             //draw widgets
-            BSP_LCD_SetTextColor(LCD_COLOR_VERDEROBOCIN);
-            BSP_LCD_FillRect(0, 0, 240, 272);
+            logoBackground.draw();
             vssButton.draw();
-            vssImage.draw();
+            sslButton.draw();
+            settingsButton.draw();
             logo.draw();
 
-            //window 'function'
+
             while (1){
                 //update touch
                 BSP_TS_GetState(&TS_State);
 
-                //check buttons
-                // if(vssButton.isPressed(&TS_State)){
-                //     screenCounter = vss;
-                //     break;
-                // }
+                // check buttons
+                if(vssButton.isPressed(&TS_State)){
+                    screenCounter = vss;
+                    break;
+                }
             }
         }
         break;
