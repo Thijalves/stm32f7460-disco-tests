@@ -42,11 +42,11 @@ int main()
         switch (screenCounter) {
         case home: {
             //create screen widgets
-            Image vssButton(280, 70, images::vssButton);
-            Image sslButton(280, 130, images::vssButton);
-            Image settingsButton(280, 190, images::vssButton);
-            Image logo(58, 93, images::logo);
-            Rectangle logoBackground(0,0,200, 272, LCD_COLOR_VERDEROBOCIN);
+            Rectangle logoBackground(0, 0, 180, 272, LCD_COLOR_VERDEROBOCIN);
+            Image logo(48, 93, images::logo);
+            Image vssButton(255, 45, images::vssButton);
+            Image sslButton(255, 120, images::sslButton);
+            Image settingsButton(255, 195, images::optionsButton);
             
             //draw widgets
             logoBackground.draw();
@@ -54,7 +54,6 @@ int main()
             sslButton.draw();
             settingsButton.draw();
             logo.draw();
-
 
             while (1){
                 //update touch
@@ -65,18 +64,47 @@ int main()
                     screenCounter = vss;
                     break;
                 }
+                if(sslButton.isPressed(&TS_State)){
+                    screenCounter = ssl;
+                    break;
+                }
+                if(settingsButton.isPressed(&TS_State)){
+                    screenCounter = settings;
+                    break;
+                }
             }
         }
         break;
-        case vss:
+        case vss:{
             BSP_LCD_Clear(LCD_COLOR_WHITE);
-            printf("vss\n");
+            Image vssLogo(4, 4, images::vss_blue_green);
+            Rectangle leftMenu(0, 0, 40, 272, LCD_COLOR_VERDEROBOCIN);
+
+            leftMenu.draw();
+            vssLogo.draw();
+
+            BSP_LCD_SetFont(&Font12);
+            BSP_LCD_DisplayStringAt(0, 50, (uint8_t*)"Time:", LEFT_MODE);
+            while (1){
+
+            }
             break;
+        }
         case ssl:
-            printf("ssl\n");
+            BSP_LCD_Clear(LCD_COLOR_WHITE);
+            BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            BSP_LCD_DisplayStringAt(0, 0, (uint8_t*) "SSL Screen", LEFT_MODE);
+            while (1){
+                
+            }
             break;
         case settings:
-            printf("settings\n");
+            BSP_LCD_Clear(LCD_COLOR_WHITE);
+            BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+            BSP_LCD_DisplayStringAt(0, 0, (uint8_t*) "Options Screen", LEFT_MODE);
+            while (1){
+                
+            }
             break;
         default:
             printf("lixo\n");

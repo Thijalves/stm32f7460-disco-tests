@@ -39,7 +39,7 @@ Image::Image(int posX, int posY, uint8_t* source){
     this->posY = posY;
     this->source = source;
     this->width = source[0];
-    this->height = source[0];
+    this->height = source[1];
 }
 
 void Image::draw(){
