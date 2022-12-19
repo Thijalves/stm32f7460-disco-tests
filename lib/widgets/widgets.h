@@ -9,11 +9,11 @@ class Image{
     private:
         int posX;
         int posY;
-        int width;
-        int height;
+        uint16_t width;
+        uint16_t height;
         uint8_t* source;
     public:
-        Image(int posX, int posY, uint8_t* source);
+        Image(int posX, int posY, uint16_t width, uint16_t height, uint8_t* source);
         bool isPressed(TS_StateTypeDef* TS_State);
         void draw();
 };
